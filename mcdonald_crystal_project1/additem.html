@@ -18,21 +18,26 @@
 		<meta name = "viewport" content = "target-densitydpi=device-dpi" />
 		<meta name = "HandheldFriendly" content = "True" />
 		<meta name = "MobileOptimized" content = "320" />
-		
-		<!-- Document Title -->
-		<title name = "I Love Tea" </title>
-		<form aciton = "#" method = "post"/>
+		<!--Tab name-->
+		<title> "I Love Tea!</title>
 	</head>
 	<!--Document Body -->
 	<body>
-		
-		<title name = "I Love Tea" </title>
-		<fieldset>
+		<!-- Header Tags -->
+		<!--Headline tag-->
+		<!-- Document Title -->
+		<h1>Guest Information </h1>
+		<!-- slightly less important heading -->
+		<h2>Tea Party Guest List </h2>
+	<fieldset>
+		<legend> Guest Information </legend>
+			<form aciton = "#" method = "post"/>
 			<!--Add a guest Drop Down List -->
 			<ul>
-				<li>
-					<label for = "Guest"> Select Guest</label>
+					<label for = "Guest"> Add Guest</label>
 					<select id = "Guest">
+				<li>	
+						<!-- Guest Options list -->
 						<option value = "Family">Family</option>
 						<option value = "Friend">Friend</option>
 						<option value = "CoWorker">CoWorker</option>
@@ -40,5 +45,53 @@
 					</select>
 				</li>
 			</ul>
+	
+			<ul>
+					<!--Guest first/last Name text boxes -->
+					<li><legend><label for = "fname">First Name: </label><input type = "text" id = "fname" /></legend></li>
+					<li><label for = "lname">Last Name: </label><input type = "text" id = "lname" /></li>
+			</ul>
+				<li>
+					<!-- Date Input -->
+					<label for="date" >Date Invitation Mailed</label> 
+					<div>
+					<input name="date" type="date" value="" />
+				</li>
+			<ul>
+						<!-- RSVP Check Box  -->	
+				<li><input type = "checkbox" checked value = "RSVP'd" id = "RSVP'd" for = "rsvp'd">RSVP'd</label></li>
+			</ul>
+			<ul>
+				<!--Radio click boxes for Attendance-->
+				<label for = "Guest Count Info"> Guest Count Info</label>
+				<li><input type = "radio" checked value = "Attending" id = "Attending" name = "rsvp" /><label for = "Attending">Attending</label></li>
+				<li><input type = "radio" checked value = "Not Attending" id = "Not Attending" name = "rsvp" /><label for = "Not Attending"> Not Attending</label></li>
+				<li><input type = "radio" checked value = "Maybe" id = "Maybe" name = "rsvp" /><label for = "Maybe">Maybe</label></li>
+				</li>
+			</ul>
+			<ul>
+				<li>
+					<!-- Additional Guest slider -->
+					<label for = "Additional Guests"> Additional Guest</label>
+					<select id = "Additional Guests">
+					<input type="range" min="0" max="13">
+				</li>
+				<div>
+			</ul>
+			<ul>
+					<!--add notes regarding guests here. List allergies, or items they may bring.-->
+					<li><lable for = "comments" >Guest Notes Here: 
+					<div> 
+					</label><textarea id = "comments"></textarea></li>
+			</ul>
+			</form>
 		</fieldset>
+					<!--submit button-->
+					<input type = "submit" value = "Create Guest" />
+		</form>
 	</body>
+	<div>
+				<!--Link to delete info-->
+				<a href="Clear Stored Data">Clear Stored Data</a> 
+				<!--Link to displaying info-->
+				<a href="Display Data">Display Data</a> 
