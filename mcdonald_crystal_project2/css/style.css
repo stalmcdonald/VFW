@@ -22,6 +22,7 @@ body{font-family: Arial, Helvetica, san-serif;width: 571px;margin: auto;padding:
 html {
     background-color: #c6aaay;
 }
+/*body of html*/
 body {
     font-family: "Lucida Grande", "Arial", sans-serif;
     margin: 1.5em auto;
@@ -32,9 +33,11 @@ body {
     border: 0.75em solid #b9bab5;
     line-height: 1.5em;
 }
+/*paragraph margins set*/
 p {
     margin: 1.5em 0;
 }
+/*add bg color,fontcolor,and style to 1st header*/
 h1 {
     background-color: #f9d6df;
     color: #583935;
@@ -42,6 +45,7 @@ h1 {
     padding: 0.75em;
     margin: -0.75em -0.75em 0.75em -0.75em;
 }
+/*2nd header slightly smaller w/ complimentary color/size*/
 h2 {
     background-color: #f9d6df;
     color: #936555;
@@ -53,3 +57,32 @@ h1 + h2 {
     margin-top: -2em;
     padding-top: 0;
 }
+/*added style and color to links clear/store/display data*/
+a {
+	color: #583935;
+	outline: 2px dotted #f9d6df;
+}
+/*postioning navigation menu*/
+nav {
+    position: absolute;
+    bottom: 5.2em;
+    left: 5.5em;
+    width: 30em }
+/*added style to catchphrase and requirements*/  
+ span {
+ 	font-style: italic;
+ 	font-weight: bold;
+ }
+ 
+ legend {
+ 	font-style: italic;
+ 	color: #583935;
+ }
+ /*style and color added to index*/
+ div {
+ 	 background-color: #f9d6df;
+ 	 padding:2em;
+     margin: -1em -1em -1em -1em;
+     
+ }
+ 
