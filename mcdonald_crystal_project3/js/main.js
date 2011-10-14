@@ -21,9 +21,9 @@ window.addEventListener("DOMContentLoaded", function() {
 			selectLi = $('select'),
 			makeSelect = document.createElement('select');
 			makeSelect.setAttribute("id", "guest");
-		for(var i=0, j=contactGroups.length; i<j;  i++) {
+		for(var i=0, j=addGuest.length; i<j;  i++) {
 			var makeOption = document.createElement('option');
-			var optText = contactGroups[i];
+			var optText = addGuest[i];
 			makeOption.setAttribute("value", optText);
 			makeOption.innerHTML = optText;
 			makeSelect.appendChild(makeOption);
@@ -68,7 +68,7 @@ window.addEventListener("DOMContentLoaded", function() {
 				//reloads page back to form
 				$("addNew").style.display = "none";
 				//were hiding not leaving, data still there
-				$("items").style.display = "none";
+				$("item").style.display = "none";
 				break;
 			default:
 				return false;
@@ -234,14 +234,14 @@ window.addEventListener("DOMContentLoaded", function() {
 		
 		function validate(e) {
 			//Define the elements we want to check
-			var getGroup = $('guest');
-			var getFname = $('fname');
-			var getLname = $('lname');
+			var getGuest = $('guest');
+			var getfname = $('fname');
+			var getlname = $('lname');
 			
 			//reset error messages
 			errMsg.innerHTML = "";
-			getGuest.syle.border = "1px solid black";
-			getFname.style.border = "1px solid black";
+			getGuest.style.border = "1px solid black";
+			getfname.style.border = "1px solid black";
 			getlname.style.border = "1px solid black";
 				
 			//Get Error messages
@@ -249,18 +249,18 @@ window.addEventListener("DOMContentLoaded", function() {
 			//Group Validation
 			if(getGuest.value==="--Choose A Guest--") {
 				var guestError = "Please Choose a Guest.";
-				getGuest.syle.border = "1px solid red";
+				getGuest.style.border = "1px solid red";
 				messageAry.push(guestError);
 			}
 			
 			//first name validation
 			if(getFname.value ==="") {
 			var fNameError = "Please enter first name.";
-			getFname.style.border = "1px solid red";
+			getfname.style.border = "1px solid red";
 			messageAry.push(fNameError);
 		}
 		//last name validation
-			if(getLname.value ==="") {
+			if(getlname.value ==="") {
 			var lNameError = "Please enter a last name.";
 			getlname.style.border = "1px solid red";
 			messageAry.push(lNameError);
@@ -281,7 +281,7 @@ window.addEventListener("DOMContentLoaded", function() {
 		}
 	}
 		//Variable defaults array for drop down menu
-		var contactGroups = ["--Choose A Guest","Family","Friends","CoWorker","VIP","Honored Guest"],
+		var addGuest = ["--Choose A Guest--","Family","Friends","CoWorker","VIP","Honored Guest"],
 			attendValue,
 			rsvpValue = "No",
 			errMsg = $('errors');

@@ -75,7 +75,6 @@ a:active{color: gray;}
 
 /*postioning navigation menu*/
 nav {
-    position: absolute;
     bottom: 4em;
     left: 5.5em;
     width: 30em }

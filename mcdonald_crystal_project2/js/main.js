@@ -234,7 +234,7 @@ window.addEventListener("DOMContentLoaded", function() {
 		
 		function validate(e) {
 			//Define the elements we want to check
-			var getGroup = $('guest');
+			var getGuest= $('guest');
 			var getFname = $('fname');
 			var getLname = $('lname');
 			
