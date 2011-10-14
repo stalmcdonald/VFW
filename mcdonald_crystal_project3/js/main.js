@@ -254,7 +254,7 @@ window.addEventListener("DOMContentLoaded", function() {
 			}
 			
 			//first name validation
-			if(getFname.value ==="") {
+			if(getfname.value ==="") {
 			var fNameError = "Please enter first name.";
 			getfname.style.border = "1px solid red";
 			messageAry.push(fNameError);
