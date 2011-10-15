@@ -12,17 +12,7 @@ window.addEventListener("DOMContentLoaded", function() {
 	function $(x) {
 		var theElement = document.getElementById(x);
 		return theElement;
-	}	
-	
-	//Variable defaults array for drop down menu
-	var addGuest = ["--Choose A Guest--","Family","Friends","CoWorker","VIP","Honored Guest"];
-	var attendValue = "";
-	var rsvpValue = "No";
-	var errMsg = $('errors');
-	var save = $("submit");
-	var displayLink = $("displayLink");	
-	var clearLink = $("clear");
-	
+	}
 	//create select field element an populate it w/ options. exchanged createGuests from makeCats.
 	function createGuests() {
 				//created variable to target form tag
@@ -41,17 +31,15 @@ window.addEventListener("DOMContentLoaded", function() {
 		//attaches to the page
 		selectLi.appendChild(makeSelect);
 	}
-	
 	//Find value of selected radio button.
 	function getSelectedRadio() {
-		var radios = document.forms[0].attend; 
-		for(var i=0; i<radios.length; i++) {;
+		var radios = document.getElementbyId.guestForm[0].attend; 
+		for(var i=0; i<radios.length; i++) {
 			if(radios[i].checked) {
 				attendValue = radios[i].value;
 			}
 		}
 	}
-	
 	function getCheckboxValue() {
 		if($("RSVPd").checked) {
 			rsvpValue = $("RSVPd").value;
@@ -86,8 +74,7 @@ window.addEventListener("DOMContentLoaded", function() {
 				return false;
 		}
 	}
-	
-	function storeData(key) {
+		function storeData(key) {
 			//if no key, this is a brand new item ans we need new key
 			if (!key){
 				//everytime submit guest it generates a new id creating a new random number
@@ -98,13 +85,10 @@ window.addEventListener("DOMContentLoaded", function() {
 				//to the validate function, and tehn passed here, into the storeData function.
 				id = key;
 			}
-		
 			//Gather up all our form field values and store in an object
 			//object properties contain array w/ form label and input values. 
 			getSelectedRadio();
-			
 			getCheckboxValue();
-		
 			var item   = {};
 				item.guest = ["Add Guest:", $('guest').value];
 				item.fname = ["First Name:", $('fname').value];
@@ -114,145 +98,11 @@ window.addEventListener("DOMContentLoaded", function() {
 				item.attend = ["Attendance:",attendValue]; //radio
 				item.additionalGuest= ["Additional Guests:", $("Additional").value];
 				item.notes = ["Notes:", $("notes").value];
-	
+		
 			//save data in local storage using stringify to convert object to a string with all of our values
 			localStorage.setItem(id, JSON.stringify(item) );
 			alert("Guest Saved!");
 		}
-		
-	function validate(e) {
-
-			//Define the elements we want to check
-			var getGuest = $('guest');
-			var getfname = $('fname');
-			var getlname = $('lname');
-			
-			//reset error messages
-			errMsg.innerHTML = "";
-			getGuest.style.border = "1px solid black";
-			getfname.style.border = "1px solid black";
-			getlname.style.border = "1px solid black";	
-			//Get Error messages
-			var messageAry = [];
-		
-			//Group Validation
-			if(getGuest.value==="--Choose A Guest--") {
-				var guestError = "Please Choose a Guest.";
-				getGuest.style.border = "1px solid red";
-				messageAry.push(guestError);
-			}
-			//first name validation
-			if(getfname.value ==="") {	
-				var fNameError = "Please enter first name.";	
-				getfname.style.border = "1px solid red";
-				messageAry.push(fNameError);
-			}
-	
-		//last name validation
-			if(getlname.value ==="") {
-		
-				var lNameError = "Please enter a last name.";
-				getlname.style.border = "1px solid red";
-				messageAry.push(lNameError);
-		}
-		
-		//If there were errors, display them on the screen
-		if(messageAry.length >= 1) {
-		
-			for(var i=0, j=messageAry.length; i <j; i++) {
-				var txt = document.createElement('li');
-				txt.innerHTML = messageAry[i];
-				errMsg.appendChild(txt);
-			}	
-			
-			e.preventDefault();
-			return false;
-		}else{	
-		
-			//if all is okay, save our data. Send the key value (which came from the editData function.
-			//Remember this key value was passed through the editSubmit event list as a property.
-			storeData(this.key);
-		
-		}
-			
-	}
-			
-		
-	function editItem() {
-			//Grab data from item from local storage
-			var value = localStorage.getItem(this.key);//same as editLink.key
-			var item = JSON.parse(value);
-			
-			//show the form to edit item
-			toggleControls("off");
-		
-			//populate the form fields with current localStorage values.
-			$('guest').value = item.guest[1];
-			$('fname').value = item.fname[1];
-			$('lname').value = item.lname[1];
-			$('date').value = item.date[1];
-			if(item.RSVPd[1] == "Yes"){
-				$("RSVPd").setAttribute("checked", "checked");
-			}
-			var radios = document.forms[0].attend;
-			for(var i=0; i<radios.length; i++) {
-				if(radios[i].value == "Attending" && item.attend[i] == "Attending"){
-					radios[i].setAttribute("checked", "checked");
-				}else if(radios[i].value == "Not Attending" && item.attend[i] == "Not Attending"){
-					radios[i].setAttribute("checked", "checked");
-				}else if(radios[i].value == "Maybe" && item.attend[i] == "Maybe"){
-					radios[i].setAttribute("checked", "checked");
-				}
-			}
-			$("Additional").value = item.additionalGuest[1];
-			$("date").value = item.date[1];
-			$("notes").value = item.notes[1];
-			
-			//Remove the intitial listener from the input 'save contact' button.
-			save.removeEventListener("click", storeData);
-			//change submit button value to say Edit button
-			$('submit').value = "Edit Guest";
-			var editSubmit = $('submit');
-			//save the key value established in this function as a property of the edit submit
-			//so we can use that value to Edit Button
-			editSubmit.addEventListener("click", validate);
-			editSubmit.key = this.key;
-		}		
-	
-	function deleteItem(){
-		var ask = confirm("Are you sure you want to delete Guest?");
-		if(ask){
-			localStorage.removeItem(this.key);
-			alert("Guest was deleted.");
-			window.location.reload();
-		}else{
-			alert("Guest was NOT deleted.");
-		}
-	}	
-		
-	function makeItemLinks(key, linksLi) {
-		//add edit single item link
-		var editLink = document.createElement('a');
-	    editLink.href = "#";
-		editLink.key = key;//property created to edit link function
-		var editText = "Edit Guest";
-		editLink.addEventListener("click", editItem);
-		editLink.innerHTML = editText;
-		linksLi.appendChild(editLink);
-		
-		//add line break
-		var breakTag = document.createElement('br');
-		linksLi.appendChild(breakTag);
-		
-		//add delete single item link
-		var deleteLink = document.createElement('a');
-		deleteLink.href = "#";
-		deleteLink.key = key;
-		var deleteText = "Delete Guest";
-		deleteLink.addEventListener("click", deleteItem);
-		deleteLink.innerHTML = deleteText;
-		linksLi.appendChild(deleteLink);
-		}		
 		
 	function getData(){
 		toggleControls("on");
@@ -295,10 +145,83 @@ window.addEventListener("DOMContentLoaded", function() {
 				//SelectLi.appendChild(makeSelect);
 			}	
 		}
+		//make item links function
+		//creates edit/delete links for each stored item when displayed.
+		function makeItemLinks(key, linksLi) {
+		//add edit single item link
+		var editLink = document.createElement('a');
+	    editLink.href = "#";
+		editLink.key = key;//property created to edit link function
+		var editText = "Edit Guest";
+		editLink.addEventListener("click", editItem);
+		editLink.innerHTML = editText;
+		linksLi.appendChild(editLink);
 		
-	//make item links function
-	//creates edit/delete links for each stored item when displayed.
-	function clearLocal() {
+		//add line break
+		var breakTag = document.createElement('br');
+		linksLi.appendChild(breakTag);
+		
+		//add delete single item link
+		var deleteLink = document.createElement('a');
+		deleteLink.href = "#";
+		deleteLink.key = key;
+		var deleteText = "Delete Guest";
+		deleteLink.addEventListener("click", deleteItem);
+		deleteLink.innerHTML = deleteText;
+		linksLi.appendChild(deleteLink);
+		}
+		
+		function editItem() {
+			//Grab data from item from local storage
+			var value = localStorage.getItem(this.key);//same as editLink.key
+			var item = JSON.parse(value);
+			
+			//show the form to edit item
+			toggleControls("off");
+		
+			//populate the form fields with current localStorage values.
+			$('guest').value = item.guest[1];
+			$('fname').value = item.fname[1];
+			$('lname').value = item.lname[1];
+			$('date').value = item.date[1];
+			if(obj.RSVPd[1] == "Yes"){
+				$("RSVPd").setAttribute("checked", "checked");
+		}
+			var radios = document.forms[0].attend;
+			for(var i=0; i<radios.length; i++) {
+				if(radios[i].value == "Attending" && item.attendance[i] == "Attending"){
+					radios[i].setAttribute("checked", "checked");
+				}else if(radios[i].value == "Not Attending" && item.attend[i] == "Not Attending"){
+					radios[i].setAttribute("checked", "checked");
+			}
+		}
+			$("Additional Guests").value = item.showValue[1];
+			$("date").value = item.date[1];
+			$("notes").value = item.notes[1];
+			
+			//Remove the intitial listener from the input 'save contact' button.
+			save.removeEventListener("click", storeData);
+			//change submit button value to say Edit button
+			$('submit').value = "Edit Guest";
+			var editSubmit = $('submit');
+			//save the key value established in this function as a property of the edit submit
+			//so we can use that value to Edit Button
+			editSubmit.addEventListener("click", validate);
+			editSubmit.key = this.key;
+		}
+		
+		function deleteItem(){
+			var ask = confirm("Are you sure you want to delete Guest?");
+			if(ask){
+				localStorage.removeItem(this.key);
+				alert("Guest was deleted.");
+				window.location.reload();
+			}else{
+				alert("Guest was NOT deleted.");
+			}
+		}	
+		
+		function clearLocal() {
 			if(localStorage.length === 0) {
 				alert("There is no data to clear.");
 			}else{
@@ -309,15 +232,73 @@ window.addEventListener("DOMContentLoaded", function() {
 			}
 		}
 		
-	//execute function
-	createGuests();
+		function validate(e) {
+			//Define the elements we want to check
+			var getGuest = $('guest');
+			var getfname = $('fname');
+			var getlname = $('lname');
+			
+			//reset error messages
+			errMsg.innerHTML = "";
+			getGuest.style.border = "1px solid black";
+			getfname.style.border = "1px solid black";
+			getlname.style.border = "1px solid black";
+				
+			//Get Error messages
+			var messageAry = [];
+			//Group Validation
+			if(getGuest.value==="--Choose A Guest--") {
+				var guestError = "Please Choose a Guest.";
+				getGuest.style.border = "1px solid red";
+				messageAry.push(guestError);
+			}
+			
+			//first name validation
+			if(getfname.value ==="") {
+			var fNameError = "Please enter first name.";
+			getfname.style.border = "1px solid red";
+			messageAry.push(fNameError);
+		}
+		//last name validation
+			if(getlname.value ==="") {
+			var lNameError = "Please enter a last name.";
+			getlname.style.border = "1px solid red";
+			messageAry.push(lNameError);
+		}
+		//If there were errors, display them on the screen
+		if(messageAry.length >= 1) {
+			for(var i=0, j=messageAry.length; i <j; i++) {
+				var txt = document.createElement('li');
+				txt.innerHTML = messageAry[i];
+				errMsg.appendChild(txt);
+			}	
+			e.preventDefault();
+			return false;
+		}else{
+			//if all is okay, save our data. Send the key value (which came from the editData function.
+			//Remember this key value was passed through the editSubmit event list as a property.
+			storeData(this.key);
+		}
+	}
+		//Variable defaults array for drop down menu
+		var addGuest = ["--Choose A Guest--","Family","Friends","CoWorker","VIP","Honored Guest"],
+			attendValue,
+			rsvpValue = "No",
+			errMsg = $('errors');
+			//execute our function
+			createGuests();
+
+		//Set Link & Submit Click Events using id =display data
+		var displayLink = $("displayLink");
+		//do something w/ the element so when click something happens  addEventListner doesnt do () for the function
+		displayLink.addEventListener("click", getData);
+		var clearLink = $("clear");
+		clearLink.addEventListener("click", clearLocal);
+		var save = $("submit");
+		save.addEventListener("click", validate);
 		
-	//Set Link & Submit Click Events using id =display data
-	//do something w/ the element so when click something happens  addEventListner doesnt do () for the function
-	displayLink.addEventListener("click", getData);
-	clearLink.addEventListener("click", clearLocal);
-	save.addEventListener("click", validate);
 		
 		
+
 //ensures nothing will run until DOM content is loaded.
 });
