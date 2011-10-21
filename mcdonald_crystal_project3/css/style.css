@@ -69,7 +69,7 @@ a {
 	color: #583935;
 	outline: 2px dotted #f9d6df;
 }
-a:visited {color: purple;}
+a:visited {color: #58393;}
 a:hover {color: black;}
 a:active{color: gray;}
 

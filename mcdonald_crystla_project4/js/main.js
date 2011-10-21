@@ -1,8 +1,8 @@
 //Crystal McDonald
 //Visual Frameworks (VFW)
 //Full Sail University
-//October 13, 2011
-//Project 3
+//October 19, 2011
+//Project 4
 
 //Wait until the DOM is ready.
 window.addEventListener("DOMContentLoaded", function() {
@@ -15,7 +15,7 @@ window.addEventListener("DOMContentLoaded", function() {
 	}	
 	
 	//Variable defaults array for drop down menu
-	var addGuest = ["--Choose A Guest--","Family","Friend","CoWorker","Honored Guest"];
+	var addGuest = ["--Choose A Guest--","Family","Friend","Work","VIP"];
 	var attendValue = "";
 	var rsvpValue = "No";
 	var errMsg = $('errors');
@@ -23,9 +23,10 @@ window.addEventListener("DOMContentLoaded", function() {
 	var displayLink = $("displayLink");	
 	var clearLink = $("clear");
 	
+	
 	//create select field element an populate it w/ options. exchanged createGuests from makeCats.
 	function createGuests() {
-				//created variable to target form tag
+		//created variable to target form tag
 		var formTag = document.getElementsByTagName("form"),  //form tag is an array. b/c plural getElements.
 			//created a variable to target the list item  
 			selectLi = $('select'),
@@ -110,8 +111,8 @@ window.addEventListener("DOMContentLoaded", function() {
 				item.fname = ["First Name:", $('fname').value];
 				item.lname = ["Last Name:", $('lname').value];
 				item.date = ["Date Invitation Mailed:", $('date').value];
-				item.RSVPd = ["RSVPd:",rsvpValue];  //checkbox
-				item.attend = ["Attendance:",attendValue]; //radio
+				item.RSVPd = ["RSVPd:", rsvpValue];  //checkbox
+				item.attend = ["Attendance:", attendValue]; //radio
 				item.additionalGuest= ["Additional Guests:", $("Additional").value];
 				item.notes = ["Notes:", $("notes").value];
 	
@@ -121,40 +122,39 @@ window.addEventListener("DOMContentLoaded", function() {
 		}
 		
 	function validate(e) {
-
-			//Define the elements we want to check
-			var getGuest = $('guest');
-			var getfname = $('fname');
-			var getlname = $('lname');
-			
-			//reset error messages
-			errMsg.innerHTML = "";
-			getGuest.style.border = "1px solid black";
-			getfname.style.border = "1px solid black";
-			getlname.style.border = "1px solid black";	
-			//Get Error messages
-			var messageAry = [];
+		//Define the elements we want to check
+		var getGuest = $('guest');
+		var getfname = $('fname');
+		var getlname = $('lname');
 		
-			//Group Validation
-			if(getGuest.value==="--Choose A Guest--") {
-				var guestError = "Please Choose a Guest.";
-				getGuest.style.border = "1px solid red";
-				messageAry.push(guestError);
-			}
-			//first name validation
-			if(getfname.value ==="") {	
-				var fNameError = "Please enter first name.";	
-				getfname.style.border = "1px solid red";
-				messageAry.push(fNameError);
-			}
+		//reset error messages
+		errMsg.innerHTML = "";
+		getGuest.style.border = "1px solid black";
+		getfname.style.border = "1px solid black";
+		getlname.style.border = "1px solid black";	
+		//Get Error messages
+		var messageAry = [];
 	
-		//last name validation
-			if(getlname.value ==="") {
-		
-				var lNameError = "Please enter a last name.";
-				getlname.style.border = "1px solid red";
-				messageAry.push(lNameError);
+		//Group Validation
+		if(getGuest.value==="--Choose A Guest--") {
+			var guestError = "Please Choose a Guest.";
+			getGuest.style.border = "1px solid red";
+			messageAry.push(guestError);
 		}
+		//first name validation
+		if(getfname.value ==="") {	
+			var fNameError = "Please enter a first name.";	
+			getfname.style.border = "1px solid red";
+			messageAry.push(fNameError);
+		}
+
+	    //last name validation
+		if(getlname.value ==="") {
+	
+			var lNameError = "Please enter a last name.";
+			getlname.style.border = "1px solid red";
+			messageAry.push(lNameError);
+	}
 		
 		//If there were errors, display them on the screen
 		if(messageAry.length >= 1) {
@@ -196,11 +196,11 @@ window.addEventListener("DOMContentLoaded", function() {
 			}
 			var radios = document.forms[0].attend;
 			for(var i=0; i<radios.length; i++) {
-				if(radios[i].value == "Attending" && item.attend[i] == "Attending"){
+				if(radios[i].value == "Attending" && item.attend[1] == "Attending"){
 					radios[i].setAttribute("checked", "checked");
-				}else if(radios[i].value == "Not Attending" && item.attend[i] == "Not Attending"){
+				}else if(radios[i].value == "Not Attending" && item.attend[1] == "Not Attending"){
 					radios[i].setAttribute("checked", "checked");
-				}else if(radios[i].value == "Maybe" && item.attend[i] == "Maybe"){
+				}else if(radios[i].value == "Maybe" && item.attend[1] == "Maybe"){
 					radios[i].setAttribute("checked", "checked");
 				}
 			}
@@ -254,10 +254,62 @@ window.addEventListener("DOMContentLoaded", function() {
 		linksLi.appendChild(deleteLink);
 		}		
 		
+	//JSON Object which will auto populate local storage.
+	function autoFillData(){
+		var json = {
+			"guest1": {  
+				"guest": ["Guest:", "VIP"],
+				"fname": ["First Name:", "Queen Cercei"],
+				"lname": ["Last Name:", "Lannister"],
+				"date": ["Date Invitation Mailed:", "11/1/11"],
+				"RSVPd": ["RSVPd:", "Yes"],
+				"attend": ["Attendance:", "Attending"],
+				"additionalGuest": ["Additional Guests:", "4"],
+				"notes": ["Notes:", "Announce upon arrival."]
+			},
+		"guest2": {  
+				"guest": ["Guest:", "Work"],
+				"fname": ["First Name:", "Lady Arya"],
+				"lname": ["Last Name:", "Stark"],
+				"date": ["Date Invitation Mailed:", "11/1/11"],
+				"RSVPd": ["RSVPd:", "Yes"],
+				"attend": ["Attendance:", "Attending"],
+				"additionalGuest": ["Additional Guests:", "0"],
+				"notes": ["Notes:", "Will not relinquish 'Needle' upon entering."]
+			},
+			"guest3": {  
+				"guest": ["Guest:", "Friend"],
+				"fname": ["First Name:", "Lady Margaery"],
+				"lname": ["Last Name:", "Tyrell"],
+				"date": ["Date Invitation Mailed:", "11/1/11"],
+				"RSVPd": ["RSVPd:", "Yes"],
+				"attend": ["Attendance:", "Maybe"],
+				"additionalGuest": ["Additional Guests:", "3"],
+				"notes": ["Notes:", "Allergies: Shellfish."]
+			}
+		};
+			//Store the JSON OBJECT into Local Storage.
+		for (var n in json) {
+			var id = Math.floor(Math.random() * 100000001);
+			localStorage.setItem(id,JSON.stringify(json[n]) );
+		}
+	}
+	
+	//Get the image for the right category.
+	function getImage(guestCat, makeSubList) {
+		var imageLi = document.createElement('li');
+		makeSubList.appendChild(imageLi);
+		var newImg = document.createElement('img');
+		var setSrc = newImg.setAttribute("src", "images/"+ guestCat + ".png");
+		imageLi.appendChild(newImg);
+	}
+			
 	function getData(){
 		toggleControls("on");
 		if(localStorage.length === 0) {
-			alert("There is no data in Local Storage.");
+			autoFillData();
+			
+			alert("There is no data in Local Storage so default data was added.");
 		}
 		//write data from local storage to the browser
 		var makeDiv = document.createElement("div");
@@ -282,6 +334,9 @@ window.addEventListener("DOMContentLoaded", function() {
 			//create another unordered list item (sublist)
 			var makeSubList = document.createElement("ul");
 			makeli.appendChild(makeSubList);
+			
+			getImage(obj.guest[1], makeSubList);
+			
 			for(var n in obj) {
 				var makeSubli = document.createElement("li");
 				makeSubList.appendChild(makeSubli);
@@ -296,6 +351,9 @@ window.addEventListener("DOMContentLoaded", function() {
 			}	
 		}
 		
+
+		
+
 	//make item links function
 	//creates edit/delete links for each stored item when displayed.
 	function clearLocal() {
