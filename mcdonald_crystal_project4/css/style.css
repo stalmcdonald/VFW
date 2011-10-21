@@ -16,11 +16,11 @@ body{font-family: "Lucida Grande", "Arial", sans-serif;width: 571px;margin: auto
 
 /* applying gradient */
 .bg {
-background-image: linear-gradient(bottom, rgb(249,214,223) 31%, rgb(235,232,235) 62%);
-background-image: -o-linear-gradient(bottom, rgb(249,214,223) 31%, rgb(235,232,235) 62%);
-background-image: -moz-linear-gradient(bottom, rgb(249,214,223) 31%, rgb(235,232,235) 62%);
-background-image: -webkit-linear-gradient(bottom, rgb(249,214,223) 31%, rgb(235,232,235) 62%);
-background-image: -ms-linear-gradient(bottom, rgb(249,214,223) 31%, rgb(235,232,235) 62%);
+	background-image: linear-gradient(bottom, rgb(249,214,223) 31%, rgb(235,232,235) 62%);
+	background-image: -o-linear-gradient(bottom, rgb(249,214,223) 31%, rgb(235,232,235) 62%);
+	background-image: -moz-linear-gradient(bottom, rgb(249,214,223) 31%, rgb(235,232,235) 62%);
+	background-image: -webkit-linear-gradient(bottom, rgb(249,214,223) 31%, rgb(235,232,235) 62%);
+	background-image: -ms-linear-gradient(bottom, rgb(249,214,223) 31%, rgb(235,232,235) 62%);
 
 background-image: -webkit-gradient(
 	linear,
@@ -53,6 +53,7 @@ form{
 p {
     margin: 1.5em 0;
 }
+
 /*add bg color,fontcolor,and style to 1st header*/
 h1 {
     background-color: #f9d6df;
@@ -61,6 +62,7 @@ h1 {
     padding: 0.75em;
     margin: -0.75em -0.75em 0.75em -0.75em;
 }
+
 /*2nd header slightly smaller w/ complimentary color/size*/
 h2 {
     background-color: #f9d6df;
@@ -69,6 +71,7 @@ h2 {
     padding:1em;
     margin: -1em -1em 1em -1em;
 }
+
 h1 + h2 {
     margin-top: -2em;
     padding-top: 0;
@@ -134,6 +137,7 @@ a:hover {
 a:active {
 	color: gray;
 }
+
 /* Create Guest button size/color/style ---------- */
 #submit {
 display: inline-block;

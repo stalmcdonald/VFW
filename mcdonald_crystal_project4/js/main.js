@@ -119,7 +119,7 @@ window.addEventListener("DOMContentLoaded", function() {
 			//save data in local storage using stringify to convert object to a string with all of our values
 			localStorage.setItem(id, JSON.stringify(item) );
 			alert("Guest Saved!");
-		}
+	}
 		
 	function validate(e) {
 		//Define the elements we want to check
@@ -154,7 +154,7 @@ window.addEventListener("DOMContentLoaded", function() {
 			var lNameError = "Please enter a last name.";
 			getlname.style.border = "1px solid red";
 			messageAry.push(lNameError);
-	}
+	    }
 		
 		//If there were errors, display them on the screen
 		if(messageAry.length >= 1) {
@@ -365,7 +365,7 @@ window.addEventListener("DOMContentLoaded", function() {
 				window.location.reload();
 				return false;
 			}
-		}
+	}
 		
 	//execute function
 	createGuests();
